@@ -157,6 +157,8 @@
                                                },
                            "type":  "duallist",
                            "summaryVisibility":  "Show",
+                           "sourceDataSourceIdentifierSuffix":  "source-datasource",
+                           "destinationDataSourceIdentifierSuffix":  "destination-datasource",
                            "requiresTemplateOptions":  true
                        }
                    ]
