@@ -1,0 +1,14 @@
+[
+    {
+        "name":  "groupsToAdd",
+        "value":  "{{form.memberships.leftToRight.toJsonString}}"
+    },
+    {
+        "name":  "groupsToRemove",
+        "value":  "{{form.memberships.rightToLeft.toJsonString}}"
+    },
+    {
+        "name":  "userPrincipalName",
+        "value":  "{{form.gridUsers.UserPrincipalName}}"
+    }
+]
