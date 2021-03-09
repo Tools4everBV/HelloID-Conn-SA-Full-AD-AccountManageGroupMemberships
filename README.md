@@ -37,17 +37,17 @@ After the all-in-one PowerShell script has run and created all the required reso
 ## Manual resources
 This Delegated Form uses the following resources in order to run
 
-### Powershell data source 'AD-user-generate-table-wildcard'
+### Powershell data source 'AD-user-generate-table-wildcard-manage-groupmemberships'
 This Powershell data source runs an Active Directory query to search for matching AD user accounts. It uses an array of Active Directory OU's specified as HelloID user defined variable named _"ADusersSearchOU"_ to specify the search scope.
 
-### Powershell data source 'AD-user-generate-table-attributes-basic'
+### Powershell data source 'AD-user-generate-table-attributes-basic-manage-groupmemberships'
 This Powershell data source runs an Active Directory query to select a list of basic user attributes of the selected AD user account.  
 
-### Powershell data source 'AD-group-generate-table'
+### Powershell data source 'AD-group-generate-table-manage-groupmemberships'
 This Powershell data source runs an Active Directory query to receive the list of available AD groups. It uses an array of Active Directory OU's specified as HelloID user defined variable named _"ADgroupsSearchOU"_ to specify the scope.
 
-### Powershell data source 'AD-user-generate-table-groupmemberships'
+### Powershell data source 'AD-user-generate-table-groupmemberships-manage-groupmemberships'
 This Powershell data source runs an Active Directory query to receive the list of current groupmemberships based on the selected target AD user account.
 
-### Delegated form task 'AD-user-update-groupmemberships'
+### Delegated form task 'AD-user-update-groupmemberships-manage-groupmemberships'
 This delegated form task will modify AD groupmemberships for the selected target AD user account based on the modifications in the Delegated Form.
