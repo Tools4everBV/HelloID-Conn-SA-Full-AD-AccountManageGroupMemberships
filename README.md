@@ -51,3 +51,6 @@ This Powershell data source runs an Active Directory query to receive the list o
 
 ### Delegated form task 'AD-user-update-groupmemberships-manage-groupmemberships'
 This delegated form task will modify AD groupmemberships for the selected target AD user account based on the modifications in the Delegated Form.
+
+# HelloID Docs
+The official HelloID documentation can be found at: https://docs.helloid.com/
