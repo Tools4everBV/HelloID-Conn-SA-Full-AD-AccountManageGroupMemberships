@@ -4,4 +4,4 @@ By default, when HelloID Service Automation creates an AD account, the account d
 
 ## Business Benefits
 
-Users can update an account's group memberships without direct access to AD. By controlling access to AD and preventing orphaned accounts, security is improved.
+Users can alter an account's group memberships without direct access to AD. By controlling access to AD and preventing orphaned accounts, security is improved.
