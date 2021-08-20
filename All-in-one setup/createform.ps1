@@ -1,8 +1,12 @@
+# Set TLS to accept TLS, TLS 1.1 and TLS 1.2
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls -bor [Net.SecurityProtocolType]::Tls11 -bor [Net.SecurityProtocolType]::Tls12
+
 #HelloID variables
-$script:PortalBaseUrl = "https://CUSTOMER.helloid.com"
+#Note: when running this script inside HelloID; portalUrl and API credentials are provided automatically (generate and save API credentials first in your admin panel!)
+$portalUrl = "https://CUSTOMER.helloid.com"
 $apiKey = "API_KEY"
 $apiSecret = "API_SECRET"
-$delegatedFormAccessGroupNames = @("Users","HID_administrators") #Only unique names are supported. Groups must exist!
+$delegatedFormAccessGroupNames = @("Users") #Only unique names are supported. Groups must exist!
 $delegatedFormCategories = @("Active Directory","User Management") #Only unique names are supported. Categories will be created if not exists.
 $script:debugLogging = $false #Default value: $false. If $true, the HelloID resource GUIDs will be shown in the logging
 $script:duplicateForm = $false #Default value: $false. If $true, the HelloID resource names will be changed to import a duplicate Form
@@ -34,14 +38,29 @@ $globalHelloIDVariables.Add([PSCustomObject]@{name = $tmpName; value = $tmpValue
 #make sure write-information logging is visual
 $InformationPreference = "continue"
 
-# Create authorization headers with HelloID API key
-$pair = "$apiKey" + ":" + "$apiSecret"
-$bytes = [System.Text.Encoding]::ASCII.GetBytes($pair)
-$base64 = [System.Convert]::ToBase64String($bytes)
-$key = "Basic $base64"
-$script:headers = @{"authorization" = $Key}
+# Check for prefilled API Authorization header
+if (-not [string]::IsNullOrEmpty($portalApiBasic)) {
+    $script:headers = @{"authorization" = $portalApiBasic}
+    Write-Information "Using prefilled API credentials"
+} else {
+    # Create authorization headers with HelloID API key
+    $pair = "$apiKey" + ":" + "$apiSecret"
+    $bytes = [System.Text.Encoding]::ASCII.GetBytes($pair)
+    $base64 = [System.Convert]::ToBase64String($bytes)
+    $key = "Basic $base64"
+    $script:headers = @{"authorization" = $Key}
+    Write-Information "Using manual API credentials"
+}
+# Check for prefilled PortalBaseURL
+if (-not [string]::IsNullOrEmpty($portalBaseUrl)) {
+    $script:PortalBaseUrl = $portalBaseUrl
+    Write-Information "Using prefilled PortalURL: $script:PortalBaseUrl"
+} else {
+    $script:PortalBaseUrl = $portalUrl
+    Write-Information "Using manual PortalURL: $script:PortalBaseUrl"
+}
 # Define specific endpoint URI
-$script:PortalBaseUrl = $script:PortalBaseUrl.trim("/") + "/"
+$script:PortalBaseUrl = $script:PortalBaseUrl.trim("/") + "/"  
  
 
 function Invoke-HelloIDGlobalVariable {
