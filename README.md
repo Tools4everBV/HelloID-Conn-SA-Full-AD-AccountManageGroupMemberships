@@ -10,6 +10,7 @@ This HelloID Service Automation Delegated Form provides AD user account groupmem
 ## Versioning
 | Version | Description | Date |
 | - | - | - |
+| 1.0.1   | Updated to use new agent and audit logging | 2022/03/05  |
 | 1.0.1   | Added version number and updated all-in-one script | 2021/11/03  |
 | 1.0.0   | Initial release | 2020/09/01  |
 
