@@ -19,7 +19,7 @@ try {
 
 foreach($group in $groupsToAdd){
     try{
-        $addGroupMember = Add-ADGroupMember -Identity $group.name -Members $adUser
+        $addGroupMember = Add-ADGroupMember -Identity $group.name -Members $adUser -Confirm:$false
         Write-Information "Successfully added AD user [$userPrincipalName] to AD group $($group)"
     
         $userDisplayName = $adUser.DisplayName
@@ -55,7 +55,7 @@ foreach($group in $groupsToAdd){
 
 foreach($group in $groupsToRemove){
     try{
-        $removeGroupMember = Remove-ADGroupMember -Identity $group.name -Members $adUser
+        $removeGroupMember = Remove-ADGroupMember -Identity $group.name -Members $adUser -Confirm:$false
         Write-Information "Successfully removed AD user [$userPrincipalName] from AD group $($group)"
     
         $userDisplayName = $adUser.DisplayName
