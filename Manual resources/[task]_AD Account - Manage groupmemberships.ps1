@@ -20,14 +20,14 @@ try {
 foreach($group in $groupsToAdd){
     try{
         $addGroupMember = Add-ADGroupMember -Identity $group.name -Members $adUser -Confirm:$false
-        Write-Information "Successfully added AD user [$userPrincipalName] to AD group $($group)"
+        Write-Information "Successfully added AD user [$userPrincipalName] to AD group $($group.name)"
     
-        $userDisplayName = $adUser.DisplayName
+        $userDisplayName = $adUser.Name
         $userId = $([string]$adUser.SID)
         $Log = @{
             Action            = "GrantMembership" # optional. ENUM (undefined = default) 
             System            = "ActiveDirectory" # optional (free format text) 
-            Message           = "Successfully added AD user $userDisplayName to group $($group)" # required (free format text) 
+            Message           = "Successfully added AD user $userDisplayName to group $($group.name)" # required (free format text) 
             IsError           = $false # optional. Elastic reporting purposes only. (default = $false. $true = Executed action returned an error) 
             TargetDisplayName = $userDisplayName # optional (free format text) 
             TargetIdentifier  = $userId # optional (free format text) 
@@ -35,14 +35,14 @@ foreach($group in $groupsToAdd){
         #send result back  
         Write-Information -Tags "Audit" -MessageData $log
     } catch {
-        Write-Error "Could not add AD user [$userPrincipalName] to AD group $group. Error: $($_.Exception.Message)"
+        Write-Error "Could not add AD user [$userPrincipalName] to AD group $($group.name). Error: $($_.Exception.Message)"
 
-        $userDisplayName = $adUser.DisplayName
+        $userDisplayName = $adUser.Name
         $userId = $([string]$adUser.SID) 
         $Log = @{
             Action            = "GrantMembership" # optional. ENUM (undefined = default) 
             System            = "ActiveDirectory" # optional (free format text) 
-            Message           = "Failed to add AD user $userDisplayName to group $($group). Error: $($_.Exception.Message)" # required (free format text) 
+            Message           = "Failed to add AD user $userDisplayName to group $($group.name). Error: $($_.Exception.Message)" # required (free format text) 
             IsError           = $true # optional. Elastic reporting purposes only. (default = $false. $true = Executed action returned an error) 
             TargetDisplayName = $userDisplayName # optional (free format text) 
             TargetIdentifier  = $userId # optional (free format text) 
@@ -56,14 +56,14 @@ foreach($group in $groupsToAdd){
 foreach($group in $groupsToRemove){
     try{
         $removeGroupMember = Remove-ADGroupMember -Identity $group.name -Members $adUser -Confirm:$false
-        Write-Information "Successfully removed AD user [$userPrincipalName] from AD group $($group)"
+        Write-Information "Successfully removed AD user [$userPrincipalName] from AD group $($group.name)"
     
-        $userDisplayName = $adUser.DisplayName
+        $userDisplayName = $adUser.Name
         $userId = $([string]$adUser.SID)
         $Log = @{
             Action            = "RevokeMembership" # optional. ENUM (undefined = default) 
             System            = "ActiveDirectory" # optional (free format text) 
-            Message           = "Successfully removed AD user $userDisplayName from group $($group)" # required (free format text) 
+            Message           = "Successfully removed AD user $userDisplayName from group $($group.name)" # required (free format text) 
             IsError           = $false # optional. Elastic reporting purposes only. (default = $false. $true = Executed action returned an error) 
             TargetDisplayName = $userDisplayName # optional (free format text) 
             TargetIdentifier  = $userId # optional (free format text) 
@@ -71,14 +71,14 @@ foreach($group in $groupsToRemove){
         #send result back  
         Write-Information -Tags "Audit" -MessageData $log
     } catch {
-        Write-Error "Could not remove AD user [$userPrincipalName] from AD group $group. Error: $($_.Exception.Message)"
+        Write-Error "Could not remove AD user [$userPrincipalName] from AD group $($group.name). Error: $($_.Exception.Message)"
 
-        $userDisplayName = $adUser.DisplayName
+        $userDisplayName = $adUser.Name
         $userId = $([string]$adUser.SID) 
         $Log = @{
             Action            = "GrantMembership" # optional. ENUM (undefined = default) 
             System            = "ActiveDirectory" # optional (free format text) 
-            Message           = "Failed to remove AD user $userDisplayName from group $($group). Error: $($_.Exception.Message)" # required (free format text) 
+            Message           = "Failed to remove AD user $userDisplayName from group $($group.name). Error: $($_.Exception.Message)" # required (free format text) 
             IsError           = $true # optional. Elastic reporting purposes only. (default = $false. $true = Executed action returned an error) 
             TargetDisplayName = $userDisplayName # optional (free format text) 
             TargetIdentifier  = $userId # optional (free format text) 

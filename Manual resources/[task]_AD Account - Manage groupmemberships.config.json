@@ -1,4 +1,4 @@
 {
-  "name": "AD Account - Manage groupmemberships",
-  "runInCloud": false
+    "name":  "AD Account - Manage groupmemberships",
+    "runInCloud":  false
 }
