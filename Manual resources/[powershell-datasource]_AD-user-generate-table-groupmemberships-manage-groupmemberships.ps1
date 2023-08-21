@@ -6,6 +6,7 @@ try {
         return
     } else {
         $adUser = Get-ADuser -Filter { UserPrincipalName -eq $userPrincipalName }
+        # Write-Information "Finished searching AD user [$userPrincipalName]"
         # Write-Information "Found AD user [$userPrincipalName]"
          
         $groups = Get-ADPrincipalGroupMembership $adUser | Select-Object name, sid | Sort-Object name
